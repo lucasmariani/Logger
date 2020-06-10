@@ -15,16 +15,16 @@ public class Logger {
         return components.isEmpty ? "" : components.last!
     }
 
-    public class func log(_ error: String,
+    public class func log(error: String,
                      filename: String = #file,
                      line: Int = #line,
                      funcName: String = #function) {
         if isLoggingEnabled {
-            print("\(Date().convertToString()) \(LogEvent.error.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
+            print("\(Date().convertToString()) \(LogEvent.error.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(error)")
         }
     }
 
-    public class func log(_ message: String,
+    public class func log(message: String,
                      filename: String = #file,
                      line: Int = #line,
                      funcName: String = #function) {
@@ -33,12 +33,12 @@ public class Logger {
         }
     }
 
-    public class func log(_ warning: String,
+    public class func log(warning: String,
                      filename: String = #file,
                      line: Int = #line,
                      funcName: String = #function) {
         if isLoggingEnabled {
-            print("\(Date().convertToString()) \(LogEvent.warning.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
+            print("\(Date().convertToString()) \(LogEvent.warning.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(warning)")
         }
     }
 
