@@ -15,12 +15,30 @@ public class Logger {
         return components.isEmpty ? "" : components.last!
     }
 
+    public class func log(_ error: String,
+                     filename: String = #file,
+                     line: Int = #line,
+                     funcName: String = #function) {
+        if isLoggingEnabled {
+            print("\(Date().convertToString()) \(LogEvent.error.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
+        }
+    }
+
     public class func log(_ message: String,
                      filename: String = #file,
                      line: Int = #line,
                      funcName: String = #function) {
         if isLoggingEnabled {
-            print("\(Date().convertToString()) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
+            print("\(Date().convertToString()) \(LogEvent.message.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
+        }
+    }
+
+    public class func log(_ warning: String,
+                     filename: String = #file,
+                     line: Int = #line,
+                     funcName: String = #function) {
+        if isLoggingEnabled {
+            print("\(Date().convertToString()) \(LogEvent.warning.rawValue) [\(sourceFileName(filePath: filename))]:\(line) \(funcName) -> \(message)")
         }
     }
 
@@ -30,6 +48,12 @@ public class Logger {
         #else
         return false
         #endif
+    }
+
+    enum LogEvent: String {
+        case error = "[‼️]" // error
+        case message = "[💬]" // debug
+        case warning = "[⚠️]" // warning
     }
 }
 
